@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Plot Browser</title>
+</head>
+<body>
+    <h1>📂 {{ current if current else '/' }}</h1>
+
+    {% if parent is not none %}
+        <p><a href="{{ url_for('index', path=parent) }}">⬅ Назад</a></p>
+    {% endif %}
+
+    <ul>
+    {% for entry in entries %}
+        {% if entry.type == 'folder' %}
+            <li>📁 <a href="{{ url_for('index', path=entry.path) }}">{{ entry.name }}</a></li>
+        {% elif entry.type == 'file' %}
+            <li>📄 <a href="{{ url_for('plot_view', filename=entry.path) }}">{{ entry.name }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+</body>
+</html>

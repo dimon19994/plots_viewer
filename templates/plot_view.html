@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ filename }}</title>
+    <style>
+        body { margin: 0; font-family: sans-serif; }
+        .topbar {
+            padding: 10px;
+            background: #f0f0f0;
+            border-bottom: 1px solid #ccc;
+        }
+        iframe {
+            width: 100%;
+            height: calc(100vh - 50px);
+            border: none;
+        }
+        .nav-buttons a {
+            margin-right: 15px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="nav-buttons">
+            <a href="{{ url_for('index', path=parent) }}">⬅ Назад к папке</a>
+            {% if prev_path %}
+                <a href="{{ url_for('plot_view', filename=prev_path) }}">← Previous</a>
+            {% endif %}
+            {% if next_path %}
+                <a href="{{ url_for('plot_view', filename=next_path) }}">Next →</a>
+            {% endif %}
+            {% if same_prev_file %}
+                <a href="{{ url_for('plot_view', filename=same_prev_file) }}">← Prev save</a>
+            {% endif %}
+            {% if same_next_path %}
+                <a href="{{ url_for('plot_view', filename=same_next_path) }}">Next same →</a>
+            {% endif %}
+        </div>
+    </div>
+    <iframe src="{{ url_for('plot', filename=filename) }}"></iframe>
+</body>
+</html>
