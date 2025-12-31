@@ -93,7 +93,7 @@ def plot_view(filename):
         else None
     )
 
-    dirs = "/".join(parent_folder.split("/")[:-1])
+    dirs = "/".join(parent_folder.split("/")[:-3])
 
     all_files = []
     for root, dirs, files in os.walk(MATERIALS_PATH + dirs):
@@ -150,4 +150,4 @@ def plot_view(filename):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", debug=True, port=8018)
